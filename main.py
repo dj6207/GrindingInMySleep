@@ -167,6 +167,9 @@ class GrindInMySleep:
             current_node:NodeClasses = self.state_graph.get_metadata(self.current_id)
             
             while current_node.get('type') != NodeTypes.End.value:
+                if self.node_visit.get(self.current_id) > 5:
+                    logging.error(f"Possible infinite loop")
+                    sys.exit()
                 logging.debug(f"Current node {self.current_id}")
                 self.node_evaluation_results = []
                 neighbors:List[int] = self.state_graph.get_neighbors(self.current_id)
@@ -184,7 +187,7 @@ class GrindInMySleep:
                 sorted_results = sorted(self.node_evaluation_results, key=lambda x: x['priority'])
                 if not len(sorted_results):
                     logging.error(f"No matches found at node {self.current_id}")
-                    sys.exit()
+                    continue
                 
                 selected_node:NodeResultTypes = sorted_results[0]
                 self.current_id = selected_node.get('id')
@@ -195,10 +198,6 @@ class GrindInMySleep:
                     self.node_visit[self.current_id] += 1
                 else:
                     self.node_visit[self.current_id] = 1
-
-                if self.node_visit.get(self.current_id) > 5:
-                    logging.error(f"Possible infinite loop")
-                    sys.exit()
 
                 logging.debug(f"Moving to node {self.current_id}")
             logging.info(f"Finish executing {self.script_path}")

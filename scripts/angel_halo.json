@@ -13,8 +13,8 @@
             "type":"C",
             "comments":"Click on Summon",
             "priority":0,
-            "images":["kaguya", "nobiyo"],
-            "delay":2.0,
+            "images":["kaguya"],
+            "delay":5.0,
             "wait":0.0,
             "clicks":1,
             "links":[3]
@@ -40,19 +40,30 @@
             "clicks":1,
             "links":[4]
         },
-        {
+		{
             "id":4,
+            "type":"C",
+            "comments":"Click Attack",
+            "priority":0,
+            "images":["attack"],
+            "delay":3.0,
+            "wait":0.0,
+            "clicks":1,
+            "links":[5, 4]
+        },
+        {
+            "id":5,
             "type":"C",
             "comments":"Click Semi",
             "priority":0,
             "images":["semi_auto"],
-            "delay":3.0,
+            "delay":0.5,
             "wait":0.0,
             "clicks":1,
-            "links":[5]
+            "links":[6, 5]
         },
         {
-            "id":5,
+            "id":6,
             "type":"E",
             "comments":"End of script",
             "priority":0
