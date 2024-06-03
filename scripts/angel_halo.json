@@ -1,62 +1,61 @@
 {
     "script":"Angel Halo",
-    "comments":"",
+    "comments":"Iteration 1",
     "nodes": [
         {
-            "id":0,
-            "command":"START",
+            "id": 0,
             "type":"S",
-            "links":[1]
+            "comments":"This is assuming we are already on summon select screen",
+            "links":[1, 2]
         },
         {
             "id":1,
-            "command":"Select Summon",
-            "type":"CC",
-            "priority":1,
-            "images":["kaguya", "nobiyo", "white_rabbit", "black_rabbit"],
-            "delay":1,
-            "wait":1,
+            "type":"C",
+            "comments":"Click on Summon",
+            "priority":0,
+            "images":["kaguya", "nobiyo"],
+            "delay":2.0,
+            "wait":0.0,
             "clicks":1,
-            "links":[2]
+            "links":[3]
         },
         {
             "id":2,
-            "command":"Click Ok",
-            "type":"CC",
+            "type":"A",
+            "comments":"Swipe down if no summons found",
             "priority":1,
-            "images":["ok"],
-            "delay":2,
-            "wait":1,
-            "clicks":1,
-            "links":[3]
-        },    
+            "action":"scroll_down",
+            "delay":0.1,
+            "wait":0.0,
+            "links":[1]
+        },
         {
             "id":3,
-            "command":"Click Atk",
-            "type":"CC",
-            "priority":1,
-            "images":["attack"],
-            "delay":5,
-            "wait":1,
+            "type":"C",
+            "comments":"Party Select Screen Click Ok",
+            "priority":0,
+            "images":["ok"],
+            "delay":1.5,
+            "wait":0.0,
             "clicks":1,
             "links":[4]
         },
         {
             "id":4,
-            "command":"Click Semi",
-            "type":"CC",
-            "priority":1,
+            "type":"C",
+            "comments":"Click Semi",
+            "priority":0,
             "images":["semi_auto"],
-            "delay":1,
-            "wait":1,
+            "delay":3.0,
+            "wait":0.0,
             "clicks":1,
             "links":[5]
         },
         {
             "id":5,
-            "command":"END",
             "type":"E",
-            "priority":1
+            "comments":"End of script",
+            "priority":0
         }
     ]
 }
