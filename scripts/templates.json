@@ -1,0 +1,39 @@
+{
+    "script":"Template",
+    "comments":"",
+    "nodes": [
+        {
+            "id": 0,
+            "type":"S",
+            "comments":"",
+            "links":[1]
+        },
+        {
+            "id":1,
+            "type":"C",
+            "comments":"",
+            "priority":0,
+            "images":[],
+            "delay":2.0,
+            "wait":0.0,
+            "clicks":1,
+            "links":[2]
+        },
+        {
+            "id":2,
+            "type":"A",
+            "comments":"",
+            "priority":1,
+            "action":"",
+            "delay":0.25,
+            "wait":0.0,
+            "links":[3]
+        },
+        {
+            "id":3,
+            "type":"E",
+            "comments":"",
+            "priority":0
+        }
+    ]
+}

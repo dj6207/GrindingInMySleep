@@ -1,0 +1,60 @@
+{
+    "script":"Angel Halo",
+    "comments":"Iteration 1",
+    "nodes": [
+        {
+            "id": 0,
+            "type":"S",
+            "comments":"This is assuming we are already in summon select",
+            "links":[1, 3]
+        },
+        {
+            "id":1,
+            "type":"C",
+            "comments":"Click on Summon",
+            "priority":0,
+            "images":["kaguya", "nobiyo", "white_rabbit", "black_rabbit"],
+            "delay":2.0,
+            "wait":0.0,
+            "clicks":1,
+            "links":[2]
+        },
+        {
+            "id":3,
+            "type":"A",
+            "comments":"Swipe down if no summons found",
+            "priority":1,
+            "delay":0.25,
+            "wait":0.0,
+            "links":[1]
+        },
+        {
+            "id":2,
+            "type":"C",
+            "comments":"Party Select Screen Click Ok",
+            "priority":0,
+            "images":["ok"],
+            "delay":2.0,
+            "wait":0.0,
+            "clicks":1,
+            "links":[4]
+        },
+        {
+            "id":4,
+            "type":"C",
+            "comments":"Click Semi",
+            "priority":0,
+            "images":["semi_auto"],
+            "delay":0.2,
+            "wait":0.0,
+            "clicks":1,
+            "links":[5]
+        },
+        {
+            "id":5,
+            "type":"E",
+            "comments":"End of script",
+            "priority":0
+        }
+    ]
+}

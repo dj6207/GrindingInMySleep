@@ -1,0 +1,40 @@
+{
+    "script":"Kaguya",
+    "comments":"",
+    "nodes": [
+        {
+            "id": 0,
+            "type":"S",
+            "comments":"",
+            "links":[1]
+        },
+        {
+            "id":1,
+            "type":"C",
+            "comments":"",
+            "priority":0,
+            "images":["kaguya"],
+            "delay":2.0,
+            "wait":0.0,
+            "clicks":0,
+            "links":[2]
+        },
+        {
+            "id":2,
+            "type":"C",
+            "comments":"",
+            "priority":0,
+            "images":["leviathan_omega"],
+            "delay":2.0,
+            "wait":0.0,
+            "clicks":0,
+            "links":[3]
+        },
+        {
+            "id":3,
+            "type":"E",
+            "comments":"",
+            "priority":0
+        }
+    ]
+}

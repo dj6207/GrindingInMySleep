@@ -1,0 +1,51 @@
+{
+    "script":"Test",
+    "comments":"",
+    "nodes": [
+        {
+            "id":0,
+            "command":"START",
+            "type":"S",
+            "links":[1, 2, 3]
+        },
+        {
+            "id":1,
+            "command":"Select Summon",
+            "type":"CC",
+            "priority":1,
+            "images":["nobiyo", "white_rabbit", "black_rabbit"],
+            "delay":1,
+            "wait":1,
+            "clicks":1,
+            "links":[4]
+        },
+        {
+            "id":2,
+            "command":"Select Summon",
+            "type":"CC",
+            "priority":0,
+            "images":["kaguya", "nobiyo"],
+            "delay":2,
+            "wait":1,
+            "clicks":1,
+            "links":[4]
+        },
+        {
+            "id":3,
+            "command":"Select Summon",
+            "type":"CC",
+            "priority":2,
+            "images":["white_rabbit"],
+            "delay":5,
+            "wait":1,
+            "clicks":1,
+            "links":[4]
+        },
+        {
+            "id":4,
+            "command":"END",
+            "type":"E",
+            "priority":1
+        }
+    ]
+}

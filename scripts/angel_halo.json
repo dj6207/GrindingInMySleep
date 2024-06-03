@@ -1,0 +1,62 @@
+{
+    "script":"Angel Halo",
+    "comments":"",
+    "nodes": [
+        {
+            "id":0,
+            "command":"START",
+            "type":"S",
+            "links":[1]
+        },
+        {
+            "id":1,
+            "command":"Select Summon",
+            "type":"CC",
+            "priority":1,
+            "images":["kaguya", "nobiyo", "white_rabbit", "black_rabbit"],
+            "delay":1,
+            "wait":1,
+            "clicks":1,
+            "links":[2]
+        },
+        {
+            "id":2,
+            "command":"Click Ok",
+            "type":"CC",
+            "priority":1,
+            "images":["ok"],
+            "delay":2,
+            "wait":1,
+            "clicks":1,
+            "links":[3]
+        },    
+        {
+            "id":3,
+            "command":"Click Atk",
+            "type":"CC",
+            "priority":1,
+            "images":["attack"],
+            "delay":5,
+            "wait":1,
+            "clicks":1,
+            "links":[4]
+        },
+        {
+            "id":4,
+            "command":"Click Semi",
+            "type":"CC",
+            "priority":1,
+            "images":["semi_auto"],
+            "delay":1,
+            "wait":1,
+            "clicks":1,
+            "links":[5]
+        },
+        {
+            "id":5,
+            "command":"END",
+            "type":"E",
+            "priority":1
+        }
+    ]
+}
