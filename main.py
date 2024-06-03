@@ -167,7 +167,8 @@ class GrindInMySleep:
             current_node:NodeClasses = self.state_graph.get_metadata(self.current_id)
             
             while current_node.get('type') != NodeTypes.End.value:
-                if self.node_visit.get(self.current_id) > 5:
+                visits = self.node_visit.get(self.current_id)
+                if visits is not None and visits > 5:
                     logging.error(f"Possible infinite loop")
                     sys.exit()
                 logging.debug(f"Current node {self.current_id}")
@@ -182,7 +183,6 @@ class GrindInMySleep:
                 for command_thread in self.command_threads_list:
                     command_thread.join()
                 
-                # 
                 logging.debug(f"Path evaluation complete for node {self.current_id}")
                 sorted_results = sorted(self.node_evaluation_results, key=lambda x: x['priority'])
                 if not len(sorted_results):
