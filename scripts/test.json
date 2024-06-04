@@ -1,5 +1,5 @@
 {
-    "script":"Template",
+    "script":"Kaguya",
     "comments":"",
     "nodes": [
         {
@@ -13,28 +13,29 @@
             "type":"C",
             "comments":"",
             "priority":0,
-            "images":[],
-            "delay":2.0,
+            "images":["kaguya"],
+            "delay":5.0,
             "wait":0.0,
-            "clicks":1,
-            "links":[2]
+            "clicks":0,
+            "links":[3]
         },
         {
             "id":2,
-            "type":"A",
+            "type":"C",
             "comments":"",
-            "priority":1,
-            "action":"",
-            "delay":0.25,
+            "priority":0,
+            "images":["leviathan_omega"],
+            "delay":2.0,
             "wait":0.0,
-            "links":[4]
+            "clicks":0,
+            "links":[3]
         },
         {
             "id":3,
             "type":"W",
             "comments":"",
             "priority":0,
-            "images":[],
+            "images":["ok"],
             "max": 30.0,
             "links":[4]
         },

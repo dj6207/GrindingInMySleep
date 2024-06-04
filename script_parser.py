@@ -21,6 +21,7 @@ class NodeTypes(Enum):
     End = "E"
     Action = "A"
     Click = "C"
+    Wait = "W"
 
 class ClickNode(TypedDict):
     id: int
@@ -55,7 +56,16 @@ class EndNode(TypedDict):
     comments: str
     priority: int
 
-NodeClasses = Union[ClickNode, ActionNode, EndNode, StartNode]
+class WaitNode(TypedDict):
+    id: int 
+    type: str 
+    comments: str 
+    priority: int
+    images: List[str]
+    max: float 
+    links: List[int]
+
+NodeClasses = Union[ClickNode, ActionNode, EndNode, StartNode, WaitNode]
 
 class Script(TypedDict):
     script:str

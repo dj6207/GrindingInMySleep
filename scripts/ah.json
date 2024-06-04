@@ -5,53 +5,65 @@
         {
             "id": 0,
             "type":"S",
-            "comments":"This is assuming we are already in summon select",
-            "links":[1, 3]
+            "comments":"This is assuming we are already on summon select screen",
+            "links":[1, 2]
         },
         {
             "id":1,
             "type":"C",
             "comments":"Click on Summon",
             "priority":0,
-            "images":["kaguya", "nobiyo", "white_rabbit", "black_rabbit"],
-            "delay":2.0,
+            "images":["kaguya"],
+            "delay":5.0,
             "wait":0.0,
             "clicks":1,
-            "links":[2]
+            "links":[3]
         },
         {
-            "id":3,
+            "id":2,
             "type":"A",
             "comments":"Swipe down if no summons found",
             "priority":1,
-            "delay":0.25,
+            "action":"scroll_down",
+            "delay":0.1,
             "wait":0.0,
             "links":[1]
         },
         {
-            "id":2,
+            "id":3,
             "type":"C",
             "comments":"Party Select Screen Click Ok",
             "priority":0,
             "images":["ok"],
-            "delay":2.0,
+            "delay":1.5,
             "wait":0.0,
             "clicks":1,
             "links":[4]
         },
-        {
+		{
             "id":4,
+            "type":"C",
+            "comments":"Click Attack",
+            "priority":0,
+            "images":["attack"],
+            "delay":3.0,
+            "wait":0.0,
+            "clicks":1,
+            "links":[5, 4]
+        },
+        {
+            "id":5,
             "type":"C",
             "comments":"Click Semi",
             "priority":0,
             "images":["semi_auto"],
-            "delay":0.2,
+            "delay":0.5,
             "wait":0.0,
             "clicks":1,
-            "links":[5]
+            "links":[6, 5]
         },
         {
-            "id":5,
+            "id":6,
             "type":"E",
             "comments":"End of script",
             "priority":0

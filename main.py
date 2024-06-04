@@ -34,7 +34,14 @@ class EndNodeResult(TypedDict):
     type: NodeTypes
     priority: int 
 
-NodeResultTypes = Union[ClickNodeResult, ActionNodeResult, EndNodeResult]
+class WaitNodeResult(TypedDict):
+    id: int 
+    type: str 
+    priority: int
+    images: List[str]
+    max: float 
+
+NodeResultTypes = Union[ClickNodeResult, ActionNodeResult, EndNodeResult, WaitNodeResult]
 
 class GrindInMySleep:
     def __init__(self, confidence:float=0.8) -> None:
@@ -65,6 +72,16 @@ class GrindInMySleep:
                     "priority": data.get('priority')
                 }
                 self.node_evaluation_results.append(end_node_result)
+        elif data_type == NodeTypes.Wait.value:
+            with self.lock:
+                wait_node_result:WaitNodeResult = {
+                    "id":id,
+                    "type":data.get('type'),
+                    "priority": data.get('priority'),
+                    "images":data.get('images'),
+                    "max":data.get('max')
+                }
+                self.node_evaluation_results.append(wait_node_result)
         elif data_type == NodeTypes.Action.value:
             with self.lock:
                 action_node_result:ActionNodeResult = {
@@ -117,7 +134,7 @@ class GrindInMySleep:
         logging.debug("Screen capture generated")
         return capture_cv
     
-    def move_to(self, dest_x:float, dest_y:float, shape:Tuple[int, int]) -> None:
+    def move_to(self, dest_x:float, dest_y:float, shape:Tuple[int, int], clicks:int) -> None:
         height, width = shape
         dest_x_rand = np.random.randint(dest_x, dest_x+width)
         dest_y_rand = np.random.randint(dest_y, dest_y+height)
@@ -134,8 +151,9 @@ class GrindInMySleep:
             M_0=25, 
             D_0=18
         )
-        pya.mouseDown(duration=np.random.uniform(low=0.05, high=0.2))
-        pya.mouseUp()
+        for _ in range(clicks):
+            pya.mouseDown(duration=np.random.uniform(low=0.05, high=0.2))
+            pya.mouseUp()
 
     def execute_action(self, action:str) -> None:
         action_function = ACTION_DICT.get(action)
@@ -143,11 +161,22 @@ class GrindInMySleep:
         if action_function:
             action_function()
 
+    def wait_until(self, max_wait:float, templates:List[str], interval:float=2.0):
+        start_time:float = time.time()
+        while self.find_match(templates=templates) is None:
+            time.sleep(interval)
+            elapsed_time = time.time() - start_time
+            if elapsed_time > max_wait:
+                logging.error("Image not found within time limit")
+                sys.exit()
+
     def execute_node(self, selected_result_node:NodeResultTypes, current_node:NodeClasses) -> None:
         node_type:str = selected_result_node.get('type')
         wait_time:float = current_node.get('wait')
         if node_type == NodeTypes.End.value:
             pass
+        elif node_type == NodeTypes.Wait.value:
+            self.wait_until(max_wait=current_node.get('max'), templates=current_node.get('images'))
         elif node_type == NodeTypes.Action.value:
             # do action
             action:str = selected_result_node.get('action')
@@ -156,7 +185,7 @@ class GrindInMySleep:
             coordinates = selected_result_node.get('coordinates')
             shape = selected_result_node.get('shape')
             if coordinates:
-                self.move_to(dest_x=coordinates[0], dest_y=coordinates[1], shape=shape)
+                self.move_to(dest_x=coordinates[0], dest_y=coordinates[1], shape=shape, clicks=current_node.get('clicks'))
         if wait_time:
             time.sleep(wait_time)
 
@@ -167,10 +196,16 @@ class GrindInMySleep:
             current_node:NodeClasses = self.state_graph.get_metadata(self.current_id)
             
             while current_node.get('type') != NodeTypes.End.value:
+                
                 visits = self.node_visit.get(self.current_id)
+                if visits is None:
+                    self.node_visit[self.current_id] = 1
+                else:
+                    self.node_visit[self.current_id] += 1                
                 if visits is not None and visits > 5:
                     logging.error(f"Possible infinite loop")
                     sys.exit()
+                
                 logging.debug(f"Current node {self.current_id}")
                 self.node_evaluation_results = []
                 neighbors:List[int] = self.state_graph.get_neighbors(self.current_id)
@@ -193,11 +228,6 @@ class GrindInMySleep:
                 self.current_id = selected_node.get('id')
                 current_node:NodeClasses = self.state_graph.get_metadata(self.current_id)
                 self.execute_node(selected_result_node=selected_node, current_node=current_node)
-
-                if self.node_visit.get(self.current_id) is not None:
-                    self.node_visit[self.current_id] += 1
-                else:
-                    self.node_visit[self.current_id] = 1
 
                 logging.debug(f"Moving to node {self.current_id}")
             logging.info(f"Finish executing {self.script_path}")

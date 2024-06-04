@@ -27,43 +27,92 @@
             "action":"scroll_down",
             "delay":0.1,
             "wait":0.0,
-            "links":[1]
+            "links":[1, 2]
         },
         {
             "id":3,
+            "type":"W",
+            "comments":"Wait until party select",
+            "priority":0,
+            "images":["ok"],
+            "max": 15.0,
+            "links":[4]
+        },
+        {
+            "id":4,
             "type":"C",
             "comments":"Party Select Screen Click Ok",
             "priority":0,
             "images":["ok"],
-            "delay":1.5,
+            "delay":0.0,
             "wait":0.0,
             "clicks":1,
-            "links":[4]
+            "links":[5]
         },
+        {
+            "id":5,
+            "type":"W",
+            "comments":"Wait until battle screen",
+            "priority":0,
+            "images":["attack"],
+            "max": 30.0,
+            "links":[6]
+        },        
 		{
-            "id":4,
+            "id":6,
             "type":"C",
             "comments":"Click Attack",
             "priority":0,
             "images":["attack"],
-            "delay":3.0,
+            "delay":0.0,
             "wait":0.0,
             "clicks":1,
-            "links":[5, 4]
+            "links":[7]
         },
         {
-            "id":5,
+            "id":7,
             "type":"C",
             "comments":"Click Semi",
             "priority":0,
             "images":["semi_auto"],
-            "delay":0.5,
+            "delay":0.2,
             "wait":0.0,
             "clicks":1,
-            "links":[6, 5]
+            "links":[8]
         },
         {
-            "id":6,
+            "id":8,
+            "type":"W",
+            "comments":"Wait until battle over",
+            "priority":0,
+            "images":["ok"],
+            "max": 60.0,
+            "links":[9]
+        },
+        {
+            "id":9,
+            "type":"C",
+            "comments":"Click Ok",
+            "priority":0,
+            "images":["ok"],
+            "delay":0.2,
+            "wait":0.0,
+            "clicks":1,
+            "links":[10]
+        },         
+        {
+            "id":10,
+            "type":"C",
+            "comments":"Click Play Again",
+            "priority":0,
+            "images":["play_again"],
+            "delay":0.4,
+            "wait":0.0,
+            "clicks":1,
+            "links":[11]
+        },        
+        {
+            "id":11,
             "type":"E",
             "comments":"End of script",
             "priority":0
